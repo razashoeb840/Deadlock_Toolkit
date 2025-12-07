@@ -1,0 +1,878 @@
+/* Controls and Buttons */
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+}
+
+.tab {
+    padding: 15px 25px;
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+body.light-mode .tab {
+    color: var(--text-dark);
+}
+
+.tab:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.tab.active {
+    border-bottom-color: var(--primary);
+    color: var(--primary);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Cards */
+.card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+}
+
+body.light-mode .card {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.scenario-card {
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.scenario-card:hover {
+    border-color: var(--primary);
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-safe {
+    background: var(--success);
+    color: white;
+}
+
+.status-unsafe {
+    background: var(--danger);
+    color: white;
+}
+
+.status-warning {
+    background: var(--warning);
+    color: white;
+}
+
+/* Alerts */
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger);
+}
+
+.alert-info {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--accent);
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--warning);
+}
+
+/* Graph Nodes */
+.process-node,
+.resource-node {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: move;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.process-node {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.resource-node {
+    background: linear-gradient(135deg, var(--accent), #0891b2);
+    color: white;
+}
+
+.process-node:hover,
+.resource-node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Dialog */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+body.light-mode .modal {
+    background: white;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row .input-group {
+    flex: 1;
+}
+
+/* ============================================
+   BANKER'S ALGORITHM ENHANCEMENTS
+   ============================================ */
+
+/* Banker Configuration Section */
+.banker-config {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.banker-config .input-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.input-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 5px;
+    opacity: 0.7;
+}
+
+/* Matrix Grid Layout */
+.banker-matrices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.matrix-container {
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s;
+}
+
+body.light-mode .matrix-container {
+    background: rgba(99, 102, 241, 0.03);
+}
+
+.matrix-container:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.matrix-container h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.matrix-description {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+/* Matrix Input Styling */
+.matrix-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.matrix-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.matrix-header {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 5px;
+    padding-left: 45px;
+}
+
+.matrix-label {
+    width: 50px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.matrix-row-label {
+    width: 35px;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+}
+
+.matrix-cell {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+body.light-mode .matrix-cell {
+    background: white;
+}
+
+.matrix-cell:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.matrix-cell:hover {
+    border-color: var(--primary);
+}
+
+/* Read-only Need Matrix Cells */
+.matrix-cell-readonly {
+    width: 50px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+body.light-mode .matrix-cell-readonly {
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.matrix-cell-satisfied {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: var(--success) !important;
+    color: var(--success) !important;
+}
+
+.matrix-cell-error {
+    background: rgba(239, 68, 68, 0.2) !important;
+    border-color: var(--danger) !important;
+    color: var(--danger) !important;
+    animation: shake 0.5s;
+}
+
+/* Matrix Highlighting States */
+.matrix-cell-success {
+    background: rgba(16, 185, 129, 0.3) !important;
+    border-color: var(--success) !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
+    animation: pulseGreen 1s ease-in-out;
+}
+
+.matrix-cell-blocked {
+    background: rgba(239, 68, 68, 0.3) !important;
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5) !important;
+    animation: pulseRed 1s ease-in-out;
+}
+
+.matrix-cell-active {
+    background: rgba(245, 158, 11, 0.3) !important;
+    border-color: var(--warning) !important;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5) !important;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* Available Resources Container */
+.available-resources-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(6, 182, 212, 0.05);
+    border-radius: 12px;
+    border: 2px solid rgba(6, 182, 212, 0.2);
+}
+
+body.light-mode .available-resources-container {
+    background: rgba(6, 182, 212, 0.03);
+}
+
+.available-resources-container h3 {
+    margin-top: 0;
+    color: var(--accent);
+}
+
+.available-resource-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.available-resource-item label {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+/* Execution Controls */
+.execution-controls {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: 16px;
+    padding: 25px;
+    margin: 30px 0;
+    border: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+.execution-controls h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.playback-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.execution-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.execution-progress input[type="range"] {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.execution-progress input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.execution-progress input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.execution-progress input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: none;
+}
+
+.step-counter {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    padding: 10px 20px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+#currentStepNum {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+/* Execution Log */
+.execution-log {
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid var(--border);
+}
+
+body.light-mode .execution-log {
+    background: #f9fafb;
+}
+
+.log-entry {
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border-left: 4px solid;
+    background: var(--bg-card);
+    animation: slideInLeft 0.3s ease-out;
+}
+
+body.light-mode .log-entry {
+    background: white;
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.log-step {
+    background: var(--primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.log-message {
+    font-weight: 600;
+    font-size: 1rem;
+    flex: 1;
+}
+
+.log-details {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    white-space: pre-line;
+    margin-top: 8px;
+}
+
+/* Log Entry Types */
+.log-start {
+    border-left-color: var(--accent);
+}
+
+.log-iteration {
+    border-left-color: var(--secondary);
+}
+
+.log-execute {
+    border-left-color: var(--success);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.log-skip {
+    border-left-color: var(--warning);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.log-deadlock,
+.log-failure {
+    border-left-color: var(--danger);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.log-success {
+    border-left-color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+/* Step Details Panel */
+.step-details {
+    margin: 20px 0;
+}
+
+.step-detail-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 25px;
+    border: 2px solid;
+    animation: fadeIn 0.3s ease-out;
+}
+
+body.light-mode .step-detail-card {
+    background: white;
+}
+
+.step-detail-card.execute {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.step-detail-card.skip {
+    border-color: var(--warning);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.step-detail-card.success {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.step-detail-card.failure,
+.step-detail-card.deadlock {
+    border-color: var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.step-detail-card h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.step-info {
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.step-info p {
+    margin: 10px 0;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.comparison-item {
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid;
+}
+
+.comparison-item.ok {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.comparison-item.fail {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.success-msg {
+    color: var(--success);
+    font-weight: 600;
+    padding: 10px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--success);
+}
+
+.fail-msg {
+    color: var(--danger);
+    font-weight: 600;
+    padding: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--danger);
+}
+
+.safe-sequence {
+    font-size: 1.2rem;
+    color: var(--success);
+    text-align: center;
+    padding: 15px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.success-final,
+.failure-final {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.success-final {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.failure-final {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Animations */
+@keyframes pulseGreen {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+    }
+}
+
+@keyframes pulseRed {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scrollbar Styling for Execution Log */
+.execution-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+.execution-log::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.execution-log::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.execution-log::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
