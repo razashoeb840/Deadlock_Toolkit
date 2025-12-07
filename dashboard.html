@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadlock Toolkit - Advanced OS Simulator</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <canvas id="networkCanvas"></canvas>
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="badge">🔒 SYSTEM LEVEL TOOL</div>
+                    <h1 class="glitch" data-text="DEADLOCK TOOLKIT">DEADLOCK TOOLKIT</h1>
+                    <p class="hero-subtitle">Visual Deadlock Detection & OS Simulator</p>
+                    <p class="hero-description">
+                        Advanced real-time deadlock detection, resource allocation visualization,
+                        and recovery simulation for operating systems education.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="index.html" class="btn btn-primary glow">
+                            <span>⚡ Launch Simulator</span>
+                        </a>
+                        <a href="#demo" class="btn btn-secondary">
+                            <span>📊 View Demo</span>
+                        </a>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Algorithms</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Real-Time</div>
+                            <div class="stat-label">Detection</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Interactive</div>
+                            <div class="stat-label">Visualization</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="graph-container">
+                        <canvas id="heroGraph"></canvas>
+                        <div class="graph-overlay">
+                            <div class="pulse-dot" style="top: 20%; left: 30%;"></div>
+                            <div class="pulse-dot" style="top: 60%; left: 70%;"></div>
+                            <div class="pulse-dot" style="top: 80%; left: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>CORE CAPABILITIES</h2>
+                <p>Enterprise-grade deadlock analysis tools</p>
+            </div>
+            <div class="features-grid">
+                <div class="glass-card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Deadlock Detection</h3>
+                    <p>Real-time cycle detection using wait-for graphs and resource allocation algorithms</p>
+                    <div class="card-tech">
+                        <span>DFS Algorithm</span>
+                        <span>Graph Theory</span>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Resource Visualization</h3>
+                    <p>Interactive drag-and-drop resource allocation graphs with live edge management</p>
+                    <div class="card-tech">
+                        <span>Canvas API</span>
+                        <span>SVG Graphics</span>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon">🏦</div>
+                    <h3>Banker's Algorithm</h3>
+                    <p>Safe state detection with step-by-step execution and matrix visualization</p>
+                    <div class="card-tech">
+                        <span>Avoidance</span>
+                        <span>Safety Check</span>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon">🛠️</div>
+                    <h3>Recovery Simulation</h3>
+                    <p>Process termination, resource preemption, and rollback mechanisms</p>
+                    <div class="card-tech">
+                        <span>Kill Process</span>
+                        <span>Preemption</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
+        <div class="container">
+            <div class="demo-content">
+                <div class="demo-left">
+                    <h2>SYSTEM-LEVEL PRECISION</h2>
+                    <p>Built for operating systems education, research, and understanding complex deadlock scenarios.
+                    </p>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Multiple detection algorithms (DFS, Wait-For Graph)</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Classic scenarios (Dining Philosophers, Producer-Consumer)</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Real-time monitoring with statistics tracking</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Recovery mechanisms with instant feedback</span>
+                        </li>
+                    </ul>
+                    <a href="index.html" class="btn btn-outline">Explore Features →</a>
+                </div>
+                <div class="demo-right">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="terminal-title">deadlock_detector.exe</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">$ ./detect_deadlock --graph rag.json</div>
+                            <div class="terminal-line output">Analyzing resource allocation...</div>
+                            <div class="terminal-line output">Building wait-for graph...</div>
+                            <div class="terminal-line output">Running DFS cycle detection...</div>
+                            <div class="terminal-line error">⚠️ DEADLOCK DETECTED</div>
+                            <div class="terminal-line output">Cycle: P1 → P2 → P3 → P1</div>
+                            <div class="terminal-line output">Processes in deadlock: 3</div>
+                            <div class="terminal-line">$ ./recover --kill P1</div>
+                            <div class="terminal-line success">✓ Process P1 terminated</div>
+                            <div class="terminal-line success">✓ Deadlock resolved</div>
+                            <div class="terminal-line cursor">█</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to simulate real OS deadlocks?</h2>
+                <p>Experience the most advanced deadlock visualization toolkit</p>
+                <a href="index.html" class="btn btn-cta">
+                    <span>START SIMULATION</span>
+                    <div class="btn-glow"></div>
+                </a>
+            </div>
+        </div>
+        <div class="wave-bg"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Deadlock Prevention & Recovery Toolkit | Built for OS Education</p>
+        </div>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

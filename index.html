@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadlock Prevention & Recovery Toolkit</title>
+
+    <!-- External Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">🔒</div>
+            <h3>Deadlock Toolkit</h3>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('graph')" data-icon="📊">
+                <span class="tab-icon">📊</span>
+                <span class="tab-text">Resource Graph</span>
+            </button>
+            <button class="nav-tab" onclick="switchTab('banker')" data-icon="🏦">
+                <span class="tab-icon">🏦</span>
+                <span class="tab-text">Banker's Algorithm</span>
+            </button>
+            <button class="nav-tab" onclick="switchTab('scenarios')" data-icon="🎭">
+                <span class="tab-icon">🎭</span>
+                <span class="tab-text">Scenarios</span>
+            </button>
+            <button class="nav-tab" onclick="switchTab('detection')" data-icon="🔍">
+                <span class="tab-icon">🔍</span>
+                <span class="tab-text">Detection</span>
+            </button>
+            <button class="nav-tab" onclick="switchTab('theory')" data-icon="📖">
+                <span class="tab-icon">📖</span>
+                <span class="tab-text">Theory</span>
+            </button>
+        </div>
+
+        <div class="sidebar-footer">
+            <button id="themeToggle" class="sidebar-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
+            <button class="sidebar-btn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+            <button class="sidebar-btn" onclick="startTutorial()" title="Tutorial">❓</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header class="floating-header">
+            <div class="header-content">
+                <h1>Deadlock Prevention & Recovery</h1>
+                <p class="subtitle">Interactive Operating Systems Education Platform</p>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+
+            <!-- Resource Allocation Graph Tab -->
+            <div id="graph" class="tab-content active">
+                <div class="section-title">
+                    <span class="section-icon">📊</span>
+                    <h2>Resource Allocation Graph</h2>
+                    <p>Visualize and analyze resource dependencies between processes</p>
+                </div>
+                <div class="card">
+                    <div class="controls">
+                        <button class="btn btn-primary ripple-container" onclick="addProcess(); createRipple(event)">➕
+                            Add
+                            Process</button>
+                        <button class="btn btn-primary ripple-container" onclick="addResource(); createRipple(event)">➕
+                            Add
+                            Resource</button>
+                        <button class="btn btn-secondary ripple-container" onclick="addEdge(); createRipple(event)">🔗
+                            Add
+                            Edge</button>
+                        <button class="btn btn-danger ripple-container" onclick="clearGraph(); createRipple(event)">🗑️
+                            Clear Graph</button>
+                        <button class="btn btn-success ripple-container"
+                            onclick="detectDeadlock(); createRipple(event)">🔍
+                            Detect Deadlock</button>
+                        <button class="btn ripple-container"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); font-size: 0.9rem; padding: 10px 16px;"
+                            onclick="loadGraphExample(); createRipple(event)">📋 Load Example</button>
+                    </div>
+
+                    <div class="controls"
+                        style="margin-top: 15px; border-top: 2px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <h4 style="margin-bottom: 10px; opacity: 0.9;">🛠️ Deadlock Recovery</h4>
+                        <button class="btn btn-warning ripple-container" onclick="killProcess(); createRipple(event)">🔪
+                            Kill Process</button>
+                        <button class="btn btn-warning ripple-container"
+                            onclick="preemptResource(); createRipple(event)">🔓
+                            Preempt Resource</button>
+                        <button class="btn btn-warning ripple-container"
+                            onclick="rollbackProcess(); createRipple(event)">🔁
+                            Rollback Process</button>
+                    </div>
+                    <div id="graphCanvas"></div>
+                    <div id="graphStatus"></div>
+                    <div id="recoveryFeedback" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+
+            <!-- Banker's Algorithm Tab -->
+            <div id="banker" class="tab-content">
+                <div class="section-title">
+                    <span class="section-icon">🏦</span>
+                    <h2>Banker's Algorithm</h2>
+                    <p>Simulate safe state detection and resource allocation strategies with detailed step-by-step
+                        execution</p>
+                </div>
+                <div class="card">
+                    <div class="banker-config">
+                        <div class="input-group">
+                            <label>Number of Processes:</label>
+                            <input type="number" id="numProcesses" value="5" min="1" max="10">
+                            <span class="input-hint">Max 10 processes</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Number of Resources:</label>
+                            <input type="number" id="numResources" value="3" min="1" max="10">
+                            <span class="input-hint">Max 10 resource types</span>
+                        </div>
+                        <button class="btn btn-primary ripple-container"
+                            onclick="initializeBanker(); createRipple(event)">🔧 Initialize Matrices</button>
+                    </div>
+
+                    <div id="bankerMatrices"></div>
+
+                    <div class="alert alert-info" style="margin-top: 20px;">
+                        <strong>💡 How it works:</strong> The Banker's Algorithm checks if the system is in a safe state
+                        by finding a sequence where all processes can complete. The <strong>Need Matrix</strong>
+                        (Maximum - Allocation) shows remaining resource requirements. A process can execute when its
+                        needs can be satisfied with available resources.
+                    </div>
+
+                    <div class="controls" style="margin-top: 20px;">
+                        <button class="btn btn-success ripple-container"
+                            onclick="runBankerAlgorithm(); createRipple(event)">▶️ Run Algorithm</button>
+                        <button class="btn btn-secondary ripple-container"
+                            onclick="loadExample(); createRipple(event)">📋 Load Example</button>
+                        <button class="btn btn-danger ripple-container"
+                            onclick="clearBankerResults(); createRipple(event)">🗑️ Clear Results</button>
+                    </div>
+
+                    <div id="bankerResult"></div>
+                </div>
+            </div>
+
+            <!-- Scenarios Tab -->
+            <div id="scenarios" class="tab-content">
+                <div class="section-title">
+                    <span class="section-icon">🎭</span>
+                    <h2>Classic Deadlock Scenarios</h2>
+                    <p>Explore real-world deadlock problems and their solutions</p>
+                </div>
+                <div class="card">
+                    <div class="grid">
+                        <div class="card scenario-card smooth-transition" onclick="runScenario('dining')">
+                            <h3>🍽️ Dining Philosophers</h3>
+                            <p>Five philosophers sitting at a table with five chopsticks</p>
+                        </div>
+                        <div class="card scenario-card smooth-transition" onclick="runScenario('producer')">
+                            <h3>🏭 Producer-Consumer</h3>
+                            <p>Multiple producers and consumers sharing a bounded buffer</p>
+                        </div>
+                        <div class="card scenario-card smooth-transition" onclick="runScenario('readers')">
+                            <h3>📚 Readers-Writers</h3>
+                            <p>Multiple readers and writers accessing shared data</p>
+                        </div>
+                        <div class="card scenario-card smooth-transition" onclick="runScenario('traffic')">
+                            <h3>🚗 Traffic Intersection</h3>
+                            <p>Four-way intersection deadlock simulation</p>
+                        </div>
+                    </div>
+                    <div id="scenarioVisualization"></div>
+                </div>
+            </div>
+
+            <!-- Detection Tab -->
+            <div id="detection" class="tab-content">
+                <div class="section-title">
+                    <span class="section-icon">🔍</span>
+                    <h2>Real-Time Deadlock Detection</h2>
+                    <p>Monitor and detect deadlocks using wait-for graphs</p>
+                </div>
+                <div class="card">
+
+                    <div class="alert alert-info">
+                        <strong>How it works:</strong> The Wait-For Graph shows which processes are waiting for others.
+                        A cycle in this graph indicates a deadlock. Processes in a deadlock cycle are highlighted in
+                        red.
+                    </div>
+
+                    <div class="controls">
+                        <button class="btn btn-primary ripple-container"
+                            onclick="addDetectionProcess(); createRipple(event)">➕ Add Process</button>
+                        <button class="btn btn-success ripple-container"
+                            onclick="runDetection(); createRipple(event)">🔍
+                            Run Detection</button>
+                        <button class="btn btn-secondary ripple-container"
+                            onclick="loadDetectionExample(); createRipple(event)">📋 Load Example</button>
+                        <button class="btn btn-primary ripple-container" id="startMonitoring"
+                            onclick="startMonitoring(); createRipple(event)">▶️ Start
+                            Monitoring</button>
+                        <button class="btn btn-danger ripple-container" id="stopMonitoring"
+                            onclick="stopMonitoring(); createRipple(event)" disabled>⏸️ Stop
+                            Monitoring</button>
+                        <button class="btn btn-danger ripple-container"
+                            onclick="resetDetectionSystem(); createRipple(event)">🔄 Reset</button>
+                    </div>
+
+                    <div class="controls"
+                        style="margin-top: 15px; border-top: 2px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <h4 style="margin-bottom: 10px; opacity: 0.9;">🛠️ Deadlock Recovery</h4>
+                        <button class="btn btn-warning ripple-container"
+                            onclick="killDetectionProcess(); createRipple(event)">🔪
+                            Kill Process</button>
+                        <button class="btn btn-warning ripple-container"
+                            onclick="preemptDetectionResource(); createRipple(event)">🔓
+                            Preempt Resource</button>
+                        <button class="btn btn-warning ripple-container"
+                            onclick="rollbackDetectionProcess(); createRipple(event)">🔁
+                            Rollback Process</button>
+                    </div>
+
+                    <div class="grid">
+                        <div>
+                            <h3>Wait-For Graph</h3>
+                            <canvas id="waitForGraph" width="400" height="300"></canvas>
+                            <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
+                                🟣 Running Process | 🔴 Deadlocked Process
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Detection Statistics</h3>
+                            <canvas id="statsChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Process Management</h3>
+                        <p style="opacity: 0.8; margin-bottom: 15px;">
+                            Configure which processes are waiting for others. Select "Waiting for" to create
+                            dependencies.
+                        </p>
+                        <div id="processList"></div>
+                    </div>
+
+                    <div id="detectionLog"></div>
+                    <div id="detectionRecoveryFeedback" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+
+            <!-- Theory Tab -->
+            <div id="theory" class="tab-content">
+                <div class="section-title">
+                    <span class="section-icon">📖</span>
+                    <h2>Deadlock Theory</h2>
+                    <p>Learn the fundamental concepts and prevention strategies</p>
+                </div>
+                <div class="card">
+
+                    <h3>What is Deadlock?</h3>
+                    <p>A deadlock is a situation where a set of processes are blocked because each process is holding a
+                        resource and waiting for another resource acquired by some other process.</p>
+
+                    <h3>Necessary Conditions (Coffman Conditions)</h3>
+                    <div class="alert alert-info">
+                        <ol>
+                            <li><strong>Mutual Exclusion:</strong> At least one resource must be held in a non-sharable
+                                mode
+                            </li>
+                            <li><strong>Hold and Wait:</strong> A process must be holding at least one resource and
+                                waiting
+                                for additional resources</li>
+                            <li><strong>No Preemption:</strong> Resources cannot be forcibly removed from processes</li>
+                            <li><strong>Circular Wait:</strong> A circular chain of processes exists where each process
+                                holds resources needed by the next</li>
+                        </ol>
+                    </div>
+
+                    <h3>Prevention Strategies</h3>
+                    <ul>
+                        <li><strong>Resource Ordering:</strong> Impose a total ordering on resources</li>
+                        <li><strong>Banker's Algorithm:</strong> Ensure system never enters unsafe state</li>
+                        <li><strong>Wait-Die/Wound-Wait:</strong> Timestamp-based prevention</li>
+                    </ul>
+
+                    <h3>Detection & Recovery</h3>
+                    <ul>
+                        <li><strong>Detection:</strong> Use resource allocation graphs or wait-for graphs</li>
+                        <li><strong>Recovery:</strong> Process termination or resource preemption</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Adding Edges -->
+        <div id="edgeModal" class="modal-overlay">
+            <div class="modal">
+                <h3>🔗 Add Edge</h3>
+                <p style="opacity: 0.8; margin-bottom: 20px;">Create a dependency between a process and a resource.</p>
+
+                <div class="input-group">
+                    <label>From (Source):</label>
+                    <select id="edgeFrom">
+                        <option value="">-- Select Source --</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>To (Target):</label>
+                    <select id="edgeTo">
+                        <option value="">-- Select Target --</option>
+                    </select>
+                </div>
+
+                <div class="alert alert-info" style="font-size: 0.9rem; margin-top: 15px;">
+                    <strong>Note:</strong> Edges typically go from Process → Resource (request) or Resource → Process
+                    (allocation).
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary ripple-container"
+                        onclick="closeEdgeModal(); createRipple(event)">Cancel</button>
+                    <button class="btn btn-primary ripple-container" onclick="confirmAddEdge(); createRipple(event)">Add
+                        Edge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div> <!-- Close content-wrapper -->
+    </div> <!-- Close main-content -->
+
+    <!-- Modal for Adding Edges -->
+    <div id="edgeModal" class="modal-overlay">
+        <div class="modal">
+            <h3>🔗 Add Edge</h3>
+            <p style="opacity: 0.8; margin-bottom: 20px;">Create a dependency between a process and a resource.</p>
+
+            <div class="input-group">
+                <label>From (Source):</label>
+                <select id="edgeFrom">
+                    <option value="">-- Select Source --</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>To (Target):</label>
+                <select id="edgeTo">
+                    <option value="">-- Select Target --</option>
+                </select>
+            </div>
+
+            <div class="alert alert-info" style="font-size: 0.9rem; margin-top: 15px;">
+                <strong>Note:</strong> Edges typically go from Process → Resource (request) or Resource → Process
+                (allocation).
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn btn-secondary ripple-container"
+                    onclick="closeEdgeModal(); createRipple(event)">Cancel</button>
+                <button class="btn btn-primary ripple-container" onclick="confirmAddEdge(); createRipple(event)">Add
+                    Edge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/interactions.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/banker.js"></script>
+    <script src="js/scenarios.js"></script>
+    <script src="js/detection.js"></script>
+</body>
+
+</html>
